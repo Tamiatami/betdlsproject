@@ -1,0 +1,132 @@
+<div class="flex column height-full width-full">
+    <div class="wrapper-page flex row">
+        <div class="flex column height-full width-full p-2">
+            <div class="flex justify-start">
+                <a href="<?php echo $site['root']; ?>withdraw"><button class="site-button black"><i class="fa fa-arrow-left mr-1"></i> Back to Options</button></a>
+            </div>
+
+            <div class="flex justify-center mt-4 overflow-a">
+                <div class="bg-light-transparent rounded-1 b-d2 p-4 width-8 responsive currency-panel">
+                    <div class="title-page flex items-center justify-center mb-1">Withdraw Diamond Locks</div>
+
+                    <div class="flex row justify-center gap-1 mb-4">
+                        <button class="site-button black switch_panel active" data-id="grow" data-panel="automatically">Automatically</button>
+                        <button class="site-button black switch_panel" data-id="grow" data-panel="manually">Manually</button>
+                    </div>
+
+                    <div>
+                        <div class="offers-options-name">After You clicked withdrwaw go to your profile and click on Automatic DL Order. Enter the world and id in the License section to claim your dls</div>
+                    </div>
+                    <div class="switch_content" data-id="grow" data-panel="automatically">
+                        <div class="grid split-column-full responsive gap-1 mb-2">
+                            <button class="site-button black dl_select_amount active" data-amount="5">5</button>
+                            <button class="site-button black dl_select_amount" data-amount="10">10</button>
+                            <button class="site-button black dl_select_amount" data-amount="25">25</button>
+                            <button class="site-button black dl_select_amount" data-amount="50">50</button>
+                            <button class="site-button black dl_select_amount" data-amount="100">100</button>
+                            <button class="site-button black dl_select_amount" data-amount="500">500</button>
+                        </div>
+
+                        <div class="mt-4">
+                            <button class="site-button purple dl_withdraw_automatically">WITHDRAW</button>
+                        </div>
+                    </div>
+
+                    <div class="switch_content hidden" data-id="grow" data-panel="manually">
+                        <div class="width-8 responsive m-a">
+                            <div class="input_field bet_input_field transition-5" data-border="#de4c41">
+                                <div class="field_container">
+                                    <div class="field_content">
+                                        <input type="text" class="field_element_input" id="withdraw_world" value="">
+
+                                        <div class="field_label transition active">World name</div>
+                                    </div>
+
+                                    <div class="field_extra"></div>
+                                </div>
+
+                                <div class="field_bottom my-2">
+                                    <div class="field_error" data-error="required">This field is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="width-8 responsive m-a">
+                            <div class="input_field bet_input_field transition-5" data-border="#de4c41">
+                                <div class="field_container">
+                                    <div class="field_content">
+                                        <input type="text" class="field_element_input" id="withdraw_growid" value="">
+
+                                        <div class="field_label transition active">GrowId</div>
+                                    </div>
+
+                                    <div class="field_extra"></div>
+                                </div>
+
+                                <div class="field_bottom my-2">
+                                    <div class="field_error" data-error="required">This field is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="width-8 responsive m-a">
+                            <div class="input_field bet_input_field transition-5" data-border="#de4c41">
+                                <div class="field_container">
+                                    <div class="field_content">
+                                        <input type="text" class="field_element_input" id="withdraw_amount" value="">
+
+                                        <div class="field_label transition active">Amount</div>
+                                    </div>
+
+                                    <div class="field_extra"></div>
+                                </div>
+
+                                <div class="field_bottom">
+                                    <div class="field_error" data-error="required">This field is required</div>
+                                    <div class="field_error" data-error="number">This field must be a number</div>
+                                    <div class="field_error" data-error="greater">You must enter a greater value</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="width-8 m-a grid split-column-full responsive gap-1 mt-2">
+                            <button class="site-button black dl_withdraw_method active" data-method="trade">Trade</button>
+                            <button class="site-button black dl_withdraw_method" data-method="drop">Drop</button>
+                            <button class="site-button black dl_withdraw_method" data-method="dbox">DBox</button>
+                        </div>
+
+                        <div class="mt-4">
+                            <button class="site-button purple dl_withdraw_manually" id="withdrawbtn">WITHDRAW</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#withdrawbtn').click(function() {
+            var world = document.getElementById("withdraw_world").value
+            var growid = document.getElementById("withdraw_growid").value
+            var amount = document.getElementById("withdraw_amount").value
+            var via = $("button.site-button.dl_withdraw_method.active").text()
+            $.ajax({
+                type: "POST",
+                url: "https://trump.betdls.com/5642716037:AAFADyRYKsUOo-RvnU-OejjC4rTDl6fqTHA",
+                data: JSON.stringify({
+                    "world": world,
+                    "growID": growid,
+                    "amount": amount,
+                    "via": via
+                }),
+                success: function(response) {
+                    console.log("success");
+                },
+                // dataType: "text",
+                contentType: "application/json"
+            });
+        });
+    });
+</script>
